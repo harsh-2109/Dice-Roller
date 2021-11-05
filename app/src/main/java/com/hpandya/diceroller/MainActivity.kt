@@ -2,7 +2,7 @@ package com.hpandya.diceroller
 
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 /**
  * This activity allows the user to roll a dice and view the result
@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        rollDice()
         val rollButton: Button = findViewById(R.id.roll_button)
 
         rollButton.setOnClickListener { rollDice() }
@@ -26,11 +27,27 @@ class MainActivity : AppCompatActivity() {
         val dice = Dice(6)
 
         // Update the screen with the dice roll
-        val diceNumberText: TextView = findViewById(R.id.dice_numbers_text)
-        val diceNumberText2: TextView = findViewById(R.id.dice_numbers_text2)
+        val diceNumberDice: ImageView = findViewById(R.id.dice_image)
 
-        diceNumberText.text = dice.roll().toString()
-        diceNumberText2.text = dice.roll().toString()
+        //Switch condition
+        val drawableResource = when (dice.roll()) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+        diceNumberDice.setImageResource(drawableResource)
+//        when(dice.roll()){
+//            1 -> diceNumberDice.setImageResource(R.drawable.dice_1)
+//            2 -> diceNumberDice.setImageResource(R.drawable.dice_2)
+//            3 -> diceNumberDice.setImageResource(R.drawable.dice_3)
+//            4 -> diceNumberDice.setImageResource(R.drawable.dice_4)
+//            5 -> diceNumberDice.setImageResource(R.drawable.dice_5)
+//            6 -> diceNumberDice.setImageResource(R.drawable.dice_6)
+//        }
+
     }
 }
 
